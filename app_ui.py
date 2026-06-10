@@ -68,9 +68,10 @@ if "recommended" in st.session_state:
 
             if st.button("View Details", key=f"details_{idx}"):
                 st.session_state.popup = data
+                st.session_state.show_popup = True
 
 
-if "popup" in st.session_state:
+if st.session_state.get("show_popup", False):
 
     data = st.session_state.popup
 
@@ -87,6 +88,10 @@ if "popup" in st.session_state:
             st.write(f"📅 Year: {data.get('Year')}")
             st.write("---")
             st.write(data.get("Plot"))
+
+        if st.button("Close"):
+            del st.session_state.show_popup 
+            st.rerun()
 
     show_popup()
 
