@@ -2,7 +2,7 @@ import streamlit as st
 import pickle
 import requests
 
-OMDB_API_KEY = "d521b86c"
+OMDB_API_KEY = st.secrets["OMDB_API_KEY"]
 
 st.set_page_config(page_title="Movie Recommender", layout="wide")
 

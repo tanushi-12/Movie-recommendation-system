@@ -6,7 +6,7 @@ import clip
 from PIL import Image
 import numpy as np
 
-OMDB_API_KEY = "d521b86c"
+OMDB_API_KEY = st.secrets["OMDB_API_KEY"]
 
 st.set_page_config(page_title="Cinematic AI Engine", layout="wide")
 st.title("🎬 Cinematic AI Recommendation Engine")
