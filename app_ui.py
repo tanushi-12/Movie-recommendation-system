@@ -11,7 +11,6 @@ OMDB_API_KEY = "d521b86c"
 st.set_page_config(page_title="Cinematic AI Engine", layout="wide")
 st.title("🎬 Cinematic AI Recommendation Engine")
 
-#  LOAD DATA 
 
 @st.cache_resource
 def load_data():
@@ -21,26 +20,22 @@ def load_data():
     return movies, similarity, clip_embeddings
 
 movies, similarity, clip_text_embeddings = load_data()
-
-# LOAD CLIP MODEL 
+ 
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 clip_model, preprocess = clip.load("ViT-B/32", device=device)
 clip_text_embeddings = clip_text_embeddings.to(device)
 
-#  WATCHLIST INIT 
 
 if "watchlist" not in st.session_state:
     st.session_state.watchlist = []
 
-# FETCH OMDB
 
 @st.cache_data
 def fetch_movie_details(title):
     url = f"http://www.omdbapi.com/?apikey={OMDB_API_KEY}&t={title}"
     return requests.get(url).json()
 
-# RECOMMEND FUNCTION 
 
 def recommend(movie_name):
     movies['title_lower'] = movies['title'].str.lower()
@@ -49,7 +44,6 @@ def recommend(movie_name):
     sorted_movies = sorted(distances, key=lambda x: x[1], reverse=True)[1:6]
     return [movies.iloc[i[0]].title for i in sorted_movies]
 
-#  MOVIE RECOMMENDER 
 
 selected_movie = st.selectbox("Choose a movie", movies['title'].values)
 
@@ -75,7 +69,6 @@ if "recommended" in st.session_state:
             if st.button("View Details", key=f"details_{idx}"):
                 st.session_state.popup = data
 
-#  POPUP DIALOG 
 
 if "popup" in st.session_state:
 
@@ -97,7 +90,6 @@ if "popup" in st.session_state:
 
     show_popup()
 
-# SCENE RECOGNITION 
 
 st.markdown("---")
 st.subheader("🎥 Scene Recognition AI")
@@ -130,7 +122,6 @@ if uploaded_file:
             st.success(f"🎬 Predicted Movie: {predicted_movie}")
             st.info(f"Confidence Score: {confidence:.2f}%")
 
-# WATCHLIST
 
 st.markdown("---")
 st.subheader("📌 Your Watchlist")
