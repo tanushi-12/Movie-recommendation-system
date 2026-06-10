@@ -25,7 +25,6 @@ pickle.dump(similarity, open("similarity.pkl", "wb"))
 
 print("TF-IDF similarity saved.")
 
-# CLIP EMBEDDINGS 
 
 print("Loading CLIP model...")
 
