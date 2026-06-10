@@ -2,14 +2,12 @@ import streamlit as st
 import pickle
 import requests
 
-# 🔐 Put your OMDb API key here
 OMDB_API_KEY = "d521b86c"
 
 st.set_page_config(page_title="Movie Recommender", layout="wide")
 
 st.title("🎬 Advanced Movie Recommendation System")
 
-# Load precomputed model
 @st.cache_resource
 def load_model():
     movies = pickle.load(open("movies.pkl", "rb"))
@@ -18,7 +16,6 @@ def load_model():
 
 movies, similarity = load_model()
 
-# Fetch poster from OMDb
 def fetch_poster(movie_title):
     url = f"http://www.omdbapi.com/?apikey={OMDB_API_KEY}&t={movie_title}"
     response = requests.get(url)
@@ -28,7 +25,6 @@ def fetch_poster(movie_title):
         return data["Poster"]
     return None
 
-# Recommendation function
 def recommend(movie_name):
     movies['title_lower'] = movies['title'].str.lower()
 
@@ -47,13 +43,11 @@ def recommend(movie_name):
 
     return recommended_movies, posters
 
-# Dropdown to select movie
 selected_movie = st.selectbox(
     "Select a movie",
     movies['title'].values
 )
 
-# Recommend button
 if st.button("Recommend"):
     names, posters = recommend(selected_movie)
 
