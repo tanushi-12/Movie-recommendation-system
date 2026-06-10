@@ -50,12 +50,12 @@ Users can upload a movie scene image. OpenAI CLIP extracts image features and co
 
 ## Installation
 
-```bash
+
 git clone https://github.com/tanushi-12/Movie-recommendation-system.git
 cd Movie-recommendation-system
 pip install -r requirements.txt
 streamlit run app_ui.py
-```
+
 
 ## Future Improvements
 
@@ -63,7 +63,20 @@ streamlit run app_ui.py
 * Advanced watchlist management
 * User authentication
 * Hybrid recommendation system
-* Deployment on Streamlit Cloud
+
+## Screenshots
+
+### Home Page
+
+![Home](images/ss1.png)
+
+### Movie Details
+
+![Popup](images/ss2.png)
+
+### Scene Recognition
+
+![Scene](images/ss3.png)
 
 ## Author
 
